@@ -1,0 +1,14 @@
+namespace MySlideShow;
+
+using MySlideShow.DataModels;
+using MySlideShow.Interfaces;
+
+public partial class EditPicture : ContentPage
+{
+    public EditPicture(ContentPage page, PictureConfig pictureConfig)
+    {
+        InitializeComponent();
+        IPhotoConfigRepository photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
+        BindingContext = new ViewModel.EditPictureVM(page, pictureConfig, photoConfigRepository);
+    }
+}
