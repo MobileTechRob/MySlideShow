@@ -8,22 +8,20 @@ namespace MySlideShow
         int count = 0;
         ViewModel.MainPageVM mainPageVM;
 
-
         public MainPage()
         {
             InitializeComponent();
             IPhotoConfigRepository photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
-            mainPageVM = new ViewModel.MainPageVM(this, photoConfigRepository);
-            mainPageVM.RefreshPhotos();
+            mainPageVM = new ViewModel.MainPageVM(this, photoConfigRepository);            
             BindingContext = mainPageVM;
         }
 
         protected override void OnAppearing()
-        {
-            DisplayAlert("Title", "Welcome to MySlideShow!", "OK");
-
+        {                    
             base.OnAppearing();
+
             // Additional logic can be added here if needed when the page appears
+            mainPageVM.RefreshPhotos();
         }
 
     }

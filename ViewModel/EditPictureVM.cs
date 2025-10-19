@@ -49,8 +49,34 @@ namespace MySlideShow.ViewModel
         public void ChangePicture()
         {
             // Implementation for changing the picture
-            
+            PictureConfig.FilePath = SelectPhotoAsync().Result;
         }
+
+        private async Task<string> SelectPhotoAsync()
+        {
+            string localFilePath = string.Empty;
+
+            try
+            {
+                MediaPickerOptions mediaPickerOptions = new MediaPickerOptions();
+                mediaPickerOptions.Title = "Select Photo";
+                FileResult fileResult = await MediaPicker.PickPhotoAsync(mediaPickerOptions);
+
+                if (fileResult != null)
+                {
+                    localFilePath = fileResult.FullPath;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                // Handle exceptions (permissions, not supported, etc.)
+            }
+
+            return localFilePath;
+        }
+
 
         public void SaveChanges()
         {

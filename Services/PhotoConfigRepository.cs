@@ -36,14 +36,14 @@ namespace MySlideShow.Services
         }
 
         void IPhotoConfigRepository.SavePhoto(PictureConfig pictureConfig)
-        {        
-            if (File.Exists(fullPath) == false)
-            {
-                return;
-            }   
-
+        {
             List<PictureConfig> listOfPictures = new();
-            listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;   
+
+            if (File.Exists(fullPath))
+            {                
+                listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;                
+            }
+
             listOfPictures.Add(pictureConfig);
 
             string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);

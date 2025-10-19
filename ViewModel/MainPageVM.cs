@@ -61,14 +61,22 @@ namespace MySlideShow.ViewModel
             GenerateShowCommand = new Command(GenerateShow);
             ListOfPictures = new ObservableCollection<DataModels.PictureConfig>();
 
-            _photoConfigRepository = photoConfigRepository;
-
+            _photoConfigRepository = photoConfigRepository!;         
             _page = page;   
+
+            RefreshPhotos();
         }
 
         public void RefreshPhotos()
         {
             List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();
+
+            if (loadedPictures == null)
+            {
+                return;
+            }
+
+            ListOfPictures.Clear();
 
             foreach (var pic in loadedPictures)
             {
