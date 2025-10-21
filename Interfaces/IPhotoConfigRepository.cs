@@ -9,6 +9,7 @@ namespace MySlideShow.Interfaces
 {
     public interface IPhotoConfigRepository
     {
+        void DeletePhoto(PictureConfig pictureConfig);
         void SavePhoto(PictureConfig pictureConfig);
         List<PictureConfig> LoadPhotos();
         void DeletePhotos();

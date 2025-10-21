@@ -11,4 +11,18 @@ public partial class EditPicture : ContentPage
         IPhotoConfigRepository photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
         BindingContext = new ViewModel.EditPictureVM(page, pictureConfig, photoConfigRepository);
     }
+
+    private void DurationEditor_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (DurationEditor != null) 
+        {
+            if (int.TryParse(DurationEditor.Text, out int duration))
+            {
+                if (BindingContext is ViewModel.EditPictureVM editPictureVM)
+                {
+                    editPictureVM.PictureConfig.DisplayDuration = duration;
+                }
+            }
+        }
+    }
 }

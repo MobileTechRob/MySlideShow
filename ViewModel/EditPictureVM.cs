@@ -33,6 +33,8 @@ namespace MySlideShow.ViewModel
         public Command ChangePictureCommand { get; set; }
         public Command SaveChangesCommand { get; set; }
 
+        public Command DeleteEntryCommand { get; set; }
+
         private ContentPage _page;
 
         IPhotoConfigRepository _photoConfigRepository;
@@ -43,14 +45,50 @@ namespace MySlideShow.ViewModel
             PictureConfig = pictureConfig;
             ChangePictureCommand = new Command(ChangePicture);
             SaveChangesCommand = new Command(SaveChanges);
+            DeleteEntryCommand = new Command(DeleteEntry);
             _photoConfigRepository = photoConfigRepository;
+        }
+
+        public void DeleteEntry(object sender)
+        {
+            // Implementation for deleting the entry
+            PictureConfig pictureConfig = (PictureConfig)sender;
+
+            _photoConfigRepository.DeletePhoto(pictureConfig);
+            _page.Navigation.PopAsync();
         }
 
         public void ChangePicture()
         {
             // Implementation for changing the picture
-            
+            PictureConfig.FilePath = SelectPhotoAsync().Result;
         }
+
+        private async Task<string> SelectPhotoAsync()
+        {
+            string localFilePath = string.Empty;
+
+            try
+            {
+                MediaPickerOptions mediaPickerOptions = new MediaPickerOptions();
+                mediaPickerOptions.Title = "Select Photo";
+                FileResult fileResult = await MediaPicker.PickPhotoAsync(mediaPickerOptions);
+
+                if (fileResult != null)
+                {
+                    localFilePath = fileResult.FullPath;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                // Handle exceptions (permissions, not supported, etc.)
+            }
+
+            return localFilePath;
+        }
+
 
         public void SaveChanges()
         {

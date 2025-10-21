@@ -61,14 +61,22 @@ namespace MySlideShow.ViewModel
             GenerateShowCommand = new Command(GenerateShow);
             ListOfPictures = new ObservableCollection<DataModels.PictureConfig>();
 
-            _photoConfigRepository = photoConfigRepository;
-
+            _photoConfigRepository = photoConfigRepository!;         
             _page = page;   
+
+            RefreshPhotos();
         }
 
         public void RefreshPhotos()
         {
             List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();
+
+            ListOfPictures.Clear();
+
+            if (loadedPictures == null)
+            {
+                return;
+            }
 
             foreach (var pic in loadedPictures)
             {
@@ -76,10 +84,12 @@ namespace MySlideShow.ViewModel
             }   
         }
 
-        public void ShowPictureConfiguration()
+        public async void ShowPictureConfiguration(object sender)
         {
             // Logic to add a picture
-            
+            PictureConfig selectedPictureConfig = (PictureConfig)sender;
+
+            await _page.Navigation.PushAsync(new EditPicture(_page, selectedPictureConfig));
         }
 
         public async void AddNewPicture()
