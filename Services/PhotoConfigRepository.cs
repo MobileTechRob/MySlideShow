@@ -15,6 +15,22 @@ namespace MySlideShow.Services
     {
         string fullPath = FileSystem.AppDataDirectory + "/photos.json";
 
+        public void DeletePhoto(PictureConfig picConfig)
+        {
+            List<PictureConfig> listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;
+
+            listOfPictures.RemoveAll(pic => pic.FilePath == picConfig.FilePath);
+
+            if (listOfPictures.Count == 0)
+            {
+                File.Delete(fullPath);
+                return;
+            }
+
+            string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);
+            File.WriteAllText(fullPath, jsonPhotoConfigList);
+        }
+
         void IPhotoConfigRepository.DeletePhotos()
         {
             if (File.Exists(fullPath))
