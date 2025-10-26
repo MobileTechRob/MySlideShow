@@ -46,9 +46,13 @@ namespace MySlideShow.ViewModel
 
         private string photo = "";
 
+        public bool PhotosPresent { get { return _listOfPictures.Count > 0; } set { } } 
+
         public Command AddPictureCommand { get; set; }
         public Command GenerateShowCommand { get; set; }
         public Command SelectedPictureCommand { get; set; }
+
+        SlideShow slideShow;
 
         ContentPage _page;
 
@@ -69,19 +73,18 @@ namespace MySlideShow.ViewModel
 
         public void RefreshPhotos()
         {
-            List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();
-
+            List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();          
             ListOfPictures.Clear();
-
+          
             if (loadedPictures == null)
             {
                 return;
             }
-
+        
             foreach (var pic in loadedPictures)
             {
                 ListOfPictures.Add(pic);
-            }   
+            }          
         }
 
         public async void ShowPictureConfiguration(object sender)
@@ -110,9 +113,24 @@ namespace MySlideShow.ViewModel
             ListOfPictures.Add(pictureConfig);
         }
 
-        public void GenerateShow()
+        public async void GenerateShow()
         {
+            slideShow = new SlideShow(ListOfPictures.ToList());
+            await _page.Navigation.PushAsync(slideShow);
+
             // Logic to generate the slideshow
+            // 
+            slideShow.DisplayFirstImage();
+
+            await Task.Run(() => { Thread.Sleep(ListOfPictures[0].DisplayDuration); });
+
+            slideShow.StartSlideShow();
+        }
+
+        private void PushPage()
+        {
+            slideShow = new SlideShow(ListOfPictures.ToList());
+            _page.Navigation.PushAsync(slideShow);
         }
 
         private async Task<string> SelectPhotoAsync()

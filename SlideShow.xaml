@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MySlideShow.SlideShow"
+             Title="SlideShow">
+    <Grid>
+        <Grid VerticalOptions="Start">
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="SlideShowImageOne" Aspect="AspectFit" Opacity="0" />
+        </Grid>
+        <Grid VerticalOptions="Start">
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="SlideShowImageTwo" Aspect="AspectFit" Opacity="0"/>
+        </Grid>
+    </Grid>
+</ContentPage>

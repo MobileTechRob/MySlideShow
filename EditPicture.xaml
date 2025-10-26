@@ -17,15 +17,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="PictureImage" Source="{Binding PictureConfig.FilePath}" Aspect="AspectFit"  WidthRequest="500" HeightRequest="500" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
-        <Label x:Name="FilePathLabel" Text="Display Duration (secs): " Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="Start" />
+        <Image x:Name="PictureImage" Source="{Binding PictureConfig.FilePath}" Aspect="AspectFit"  WidthRequest="500" HeightRequest="500" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
+        <Label x:Name="FilePathLabel" Text="  Display Duration (secs): " Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" />
         <Editor x:Name="DurationEditor" Placeholder="Duration" Text="{Binding PictureConfig.DisplayDuration}" TextChanged="DurationEditor_TextChanged" HorizontalTextAlignment="Start" AutoSize="TextChanges" Grid.Row="2" Grid.Column="0" />
-        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="3" Grid.Column="0" />
-        <Button Text="Save Changes" Command="{Binding SaveChangesCommand}" Grid.Row="3" Grid.Column="1" />
-        <Button Text="Delete Entry" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="3" Grid.Column="0"  />
+        <Button Text="Save" Command="{Binding SaveChangesCommand}" Grid.Row="3" Grid.Column="1"  />
+        <Button Text="Delete" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="3" Grid.Column="3"  />
     </Grid>
+
         <!-- Content goes here -->
 
 </ContentPage>

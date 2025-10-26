@@ -32,7 +32,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding FilePath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" Grid.Column="0"/>
-                                <Label Text="Display Duration (secs):" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                <Label Text="   Display Duration (secs): " Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                                 <Label Text="{Binding DisplayDuration}" Grid.Column="2" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                             </Grid>
                         </Border>
@@ -50,8 +50,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Text="Add Picture" Command="{Binding AddPictureCommand}" Grid.Row="0" Grid.Column="0" />
-            <Button Text="Generate Show" Command="{Binding GenerateShowCommand}" Grid.Row="0" Grid.Column="1" />
+            <Button Text="Add Picture" x:Name="AddPictureButton" Command="{Binding AddPictureCommand}" Grid.Row="0" Grid.Column="0" />
+            <Button Text="Generate Show" x:Name="GeneratePictureButton" Command="{Binding GenerateShowCommand}" Grid.Row="0" Grid.Column="1" />
         </Grid>
     </Grid>
 </ContentPage>

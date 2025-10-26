@@ -63,12 +63,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Animation\MyAnimation.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Animation\MyAnimation.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="EditPicture.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SlideShow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
