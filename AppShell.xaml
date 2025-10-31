@@ -7,7 +7,7 @@
     Title="MySlideShow">
 
     <ShellContent
-        Title=""
+        Title=""       
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

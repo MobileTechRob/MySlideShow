@@ -26,6 +26,5 @@ namespace MySlideShow
             mainPageVM.RefreshPhotos();
             GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
         }
-
     }
 }

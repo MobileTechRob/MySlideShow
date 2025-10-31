@@ -21,21 +21,6 @@ public partial class SlideShow : ContentPage
 
         _pictureConfigs = pictureConfigs;
 
-        if ((_pictureConfigs != null) && (_pictureConfigs.Count < 3))
-        {
-            _pictureConfigs.Clear();
-            _pictureConfigs.Add(new PictureConfig("img_one.png",4000));
-            _pictureConfigs.Add(new PictureConfig("img_two.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_three.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_four.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_five.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_six.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_seven.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_eight.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_nine.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_ten.png", 4000));
-            _pictureConfigs.Add(new PictureConfig("img_eleven.png", 4000));
-        }
     }
 
     public void DisplayFirstImage()
@@ -64,8 +49,10 @@ public partial class SlideShow : ContentPage
         parentAnimation.Commit(this, "Transition1", 32, durationInMilliseconds, null, TransitionFunctionCallBack_2_3, null);
     }
 
-    private void TransitionFunctionCallBack_2_3(double d, bool b)
+    private async void TransitionFunctionCallBack_2_3(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[1].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[1].FilePath;
         pictureOne = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -81,8 +68,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition2", 32, durationInMilliseconds, null, TransitionFunctionCallBack_3_4, null);
     }
 
-    private void TransitionFunctionCallBack_3_4(double d, bool b)
+    private async void TransitionFunctionCallBack_3_4(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[2].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[2].FilePath;
         pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);
@@ -99,8 +88,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition3", 32, durationInMilliseconds, null, TransitionFunctionCallBack_4_5, null);
     }
 
-    private void TransitionFunctionCallBack_4_5(double d, bool b)
+    private async void TransitionFunctionCallBack_4_5(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[3].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[3].FilePath;
         pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -116,8 +107,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition4", 32, durationInMilliseconds, null, TransitionFunctionCallBack_5_6, null);
     }
 
-    private void TransitionFunctionCallBack_5_6(double d, bool b)
+    private async void TransitionFunctionCallBack_5_6(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[4].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[4].FilePath;
         pictureOne = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -134,8 +127,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition5", 32, durationInMilliseconds, null, TransitionFunctionCallBack_6_7, null);
     }
 
-    private void TransitionFunctionCallBack_6_7(double d, bool b)
+    private async void TransitionFunctionCallBack_6_7(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[5].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[5].FilePath;
         pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -151,8 +146,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition6", 32, durationInMilliseconds, null, TransitionFunctionCallBack_7_8, null);
     }
 
-    private void TransitionFunctionCallBack_7_8(double d, bool b)
+    private async void TransitionFunctionCallBack_7_8(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[6].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[6].FilePath;
         pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);
@@ -168,8 +165,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition7", 32, durationInMilliseconds, null, TransitionFunctionCallBack_8_9, null);
     }
 
-    private void TransitionFunctionCallBack_8_9(double d, bool b)
+    private async void TransitionFunctionCallBack_8_9(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[7].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[7].FilePath;
         pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -185,8 +184,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition8", 32, durationInMilliseconds, null, TransitionFunctionCallBack_9_10, null);
     }
 
-    private void TransitionFunctionCallBack_9_10(double d, bool b)
+    private async void TransitionFunctionCallBack_9_10(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[8].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[8].FilePath;
         pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);
@@ -202,8 +203,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition9", 32, durationInMilliseconds, null, TransitionFunctionCallBack_10_11, null);
     }
 
-    private void TransitionFunctionCallBack_10_11(double d, bool b)
+    private async void TransitionFunctionCallBack_10_11(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[9].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[9].FilePath;
         pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
@@ -219,8 +222,10 @@ public partial class SlideShow : ContentPage
         parentAnimation2.Commit(this, "Transition10", 32, durationInMilliseconds, null, TransitionFunctionCallBack_11_12, null);
     }
 
-    private void TransitionFunctionCallBack_11_12(double d, bool b)
+    private async void TransitionFunctionCallBack_11_12(double d, bool b)
     {
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[10].DisplayDuration); });
+
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[10].FilePath;
         pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);

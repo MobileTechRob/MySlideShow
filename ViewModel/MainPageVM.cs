@@ -76,15 +76,37 @@ namespace MySlideShow.ViewModel
             List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();          
             ListOfPictures.Clear();
           
-            if (loadedPictures == null)
-            {
-                return;
-            }
-        
+            //if (loadedPictures == null)            
+            //{
+                loadedPictures = LoadTempPhotos();
+                //return;
+            //}
+
+            //loadedPictures.Clear();
+
             foreach (var pic in loadedPictures)
             {
                 ListOfPictures.Add(pic);
             }          
+        }
+
+        private List<PictureConfig> LoadTempPhotos()
+        {
+            List<PictureConfig> loadedPictures = new List<PictureConfig>();
+
+            loadedPictures.Add(new PictureConfig("img_one.png", 4000,5));
+            loadedPictures.Add(new PictureConfig("img_two.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_three.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_four.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_five.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_six.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_seven.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_eight.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_nine.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_ten.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_eleven.png", 4000, 5));
+
+            return loadedPictures;
         }
 
         public async void ShowPictureConfiguration(object sender)
@@ -100,14 +122,14 @@ namespace MySlideShow.ViewModel
             // Logic to add a picture
             photo = await SelectPhotoAsync();
 
-            PictureConfig pictureConfig = new PictureConfig(photo, 5);
+            PictureConfig pictureConfig = new PictureConfig(photo, 5,5);
 
             await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
         }
 
         private void PagePopped(object? sender, NavigationEventArgs args)
         {
-            PictureConfig pictureConfig = new PictureConfig(photo, 5);
+            PictureConfig pictureConfig = new PictureConfig(photo, 5, 5);
 
             // Handle any actions needed after returning from EditPicture
             ListOfPictures.Add(pictureConfig);
