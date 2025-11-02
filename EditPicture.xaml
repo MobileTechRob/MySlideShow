@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:MySlideShow.ViewModel"
              x:Class="MySlideShow.EditPicture"             
              x:DataType="vm:EditPictureVM"
+             BackgroundColor="Beige"
              Title="Edit Picture">
     
     <Grid>
