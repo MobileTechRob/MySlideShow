@@ -28,11 +28,16 @@ public partial class EditPicture : ContentPage
 
     private void Fader_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        int timeSeconds = (int)e.NewValue;
+        uint timeSeconds = (uint)e.NewValue;
 
         TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D1");
 
         if (timeSeconds == 10) 
-            TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D2");        
+            TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D2");
+
+        if (BindingContext is ViewModel.EditPictureVM editPictureVM)
+        {
+            editPictureVM.PictureConfig.TransitionTime = timeSeconds;
+        }
     }
 }

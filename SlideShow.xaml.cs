@@ -13,8 +13,6 @@ public partial class SlideShow : ContentPage
     Animation pictureOne;
     Animation pictureTwo;
 
-    uint durationInMilliseconds = 4000;
-
     public SlideShow(List<PictureConfig> pictureConfigs)
 	{
 		InitializeComponent();
@@ -31,7 +29,7 @@ public partial class SlideShow : ContentPage
 
     public async void StartSlideShow()
     {
-        int imageDisplayInterval = _pictureConfigs[0].DisplayDuration;
+        int imageDisplayInterval = _pictureConfigs[0].DisplayDurationMs;
         SlideShowImageOne.Source = _pictureConfigs[0].FilePath;
         SlideShowImageOne.Opacity = 1;
              
@@ -45,13 +43,12 @@ public partial class SlideShow : ContentPage
         parentAnimation.Add(0, 1,pictureOne);
         parentAnimation.Add(0, 1,pictureTwo);
 
-        durationInMilliseconds = 4000;
-        parentAnimation.Commit(this, "Transition1", 32, durationInMilliseconds, null, TransitionFunctionCallBack_2_3, null);
+        parentAnimation.Commit(this, "Transition1", 32, _pictureConfigs[0].TransitionTimeMs, null, TransitionFunctionCallBack_2_3, null);
     }
 
     private async void TransitionFunctionCallBack_2_3(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[1].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[1].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[1].FilePath;
@@ -65,12 +62,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureTwo);        
         }
 
-        parentAnimation2.Commit(this, "Transition2", 32, durationInMilliseconds, null, TransitionFunctionCallBack_3_4, null);
+        parentAnimation2.Commit(this, "Transition2", 32, _pictureConfigs[1].TransitionTimeMs, null, TransitionFunctionCallBack_3_4, null);
     }
 
     private async void TransitionFunctionCallBack_3_4(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[2].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[2].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[2].FilePath;
@@ -85,12 +82,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureTwo);
         }
 
-        parentAnimation2.Commit(this, "Transition3", 32, durationInMilliseconds, null, TransitionFunctionCallBack_4_5, null);
+        parentAnimation2.Commit(this, "Transition3", 32, _pictureConfigs[2].TransitionTimeMs, null, TransitionFunctionCallBack_4_5, null);
     }
 
     private async void TransitionFunctionCallBack_4_5(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[3].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[3].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[3].FilePath;
@@ -104,12 +101,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureOne);
         }
 
-        parentAnimation2.Commit(this, "Transition4", 32, durationInMilliseconds, null, TransitionFunctionCallBack_5_6, null);
+        parentAnimation2.Commit(this, "Transition4", 32, _pictureConfigs[3].TransitionTimeMs, null, TransitionFunctionCallBack_5_6, null);
     }
 
     private async void TransitionFunctionCallBack_5_6(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[4].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[4].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[4].FilePath;
@@ -124,12 +121,12 @@ public partial class SlideShow : ContentPage
         }
 
 
-        parentAnimation2.Commit(this, "Transition5", 32, durationInMilliseconds, null, TransitionFunctionCallBack_6_7, null);
+        parentAnimation2.Commit(this, "Transition5", 32, _pictureConfigs[4].TransitionTimeMs, null, TransitionFunctionCallBack_6_7, null);
     }
 
     private async void TransitionFunctionCallBack_6_7(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[5].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[5].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[5].FilePath;
@@ -143,12 +140,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureOne);
         }
 
-        parentAnimation2.Commit(this, "Transition6", 32, durationInMilliseconds, null, TransitionFunctionCallBack_7_8, null);
+        parentAnimation2.Commit(this, "Transition6", 32, _pictureConfigs[5].TransitionTimeMs, null, TransitionFunctionCallBack_7_8, null);
     }
 
     private async void TransitionFunctionCallBack_7_8(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[6].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[6].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[6].FilePath;
@@ -162,12 +159,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureTwo);
         }
 
-        parentAnimation2.Commit(this, "Transition7", 32, durationInMilliseconds, null, TransitionFunctionCallBack_8_9, null);
+        parentAnimation2.Commit(this, "Transition7", 32, _pictureConfigs[6].TransitionTimeMs, null, TransitionFunctionCallBack_8_9, null);
     }
 
     private async void TransitionFunctionCallBack_8_9(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[7].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[7].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[7].FilePath;
@@ -181,12 +178,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureOne);
         }
 
-        parentAnimation2.Commit(this, "Transition8", 32, durationInMilliseconds, null, TransitionFunctionCallBack_9_10, null);
+        parentAnimation2.Commit(this, "Transition8", 32, _pictureConfigs[7].TransitionTimeMs, null, TransitionFunctionCallBack_9_10, null);
     }
 
     private async void TransitionFunctionCallBack_9_10(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[8].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[8].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[8].FilePath;
@@ -200,12 +197,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureTwo);
         }
 
-        parentAnimation2.Commit(this, "Transition9", 32, durationInMilliseconds, null, TransitionFunctionCallBack_10_11, null);
+        parentAnimation2.Commit(this, "Transition9", 32, _pictureConfigs[8].TransitionTimeMs, null, TransitionFunctionCallBack_10_11, null);
     }
 
     private async void TransitionFunctionCallBack_10_11(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[9].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[9].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageTwo.Source = _pictureConfigs[9].FilePath;
@@ -219,12 +216,12 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureOne);
         }
 
-        parentAnimation2.Commit(this, "Transition10", 32, durationInMilliseconds, null, TransitionFunctionCallBack_11_12, null);
+        parentAnimation2.Commit(this, "Transition10", 32, _pictureConfigs[9].TransitionTimeMs, null, TransitionFunctionCallBack_11_12, null);
     }
 
     private async void TransitionFunctionCallBack_11_12(double d, bool b)
     {
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[10].DisplayDuration); });
+        await Task.Run(() => { Thread.Sleep(_pictureConfigs[10].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
         SlideShowImageOne.Source = _pictureConfigs[10].FilePath;
@@ -238,7 +235,7 @@ public partial class SlideShow : ContentPage
             parentAnimation2.Add(0, 1, pictureTwo);
         }
 
-        parentAnimation2.Commit(this, "Transition11", 32, durationInMilliseconds, null, null, null);
+        parentAnimation2.Commit(this, "Transition11", 32, _pictureConfigs[10].TransitionTimeMs, null, null, null);
     }
 
     private bool EndSlideShow() 

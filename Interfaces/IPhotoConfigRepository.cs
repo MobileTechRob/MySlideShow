@@ -11,6 +11,7 @@ namespace MySlideShow.Interfaces
     {
         void DeletePhoto(PictureConfig pictureConfig);
         void SavePhoto(PictureConfig pictureConfig);
+        void SavePhotos(List<PictureConfig> pictureConfigs);
         List<PictureConfig> LoadPhotos();
         void DeletePhotos();
     }

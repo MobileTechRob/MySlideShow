@@ -76,13 +76,12 @@ namespace MySlideShow.ViewModel
             List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();          
             ListOfPictures.Clear();
           
-            //if (loadedPictures == null)            
-            //{
-                loadedPictures = LoadTempPhotos();
-                //return;
-            //}
+            if (loadedPictures == null)            
+            {
+                _photoConfigRepository.SavePhotos(LoadTempPhotos());
 
-            //loadedPictures.Clear();
+                loadedPictures = _photoConfigRepository.LoadPhotos();
+            }
 
             foreach (var pic in loadedPictures)
             {
@@ -94,17 +93,17 @@ namespace MySlideShow.ViewModel
         {
             List<PictureConfig> loadedPictures = new List<PictureConfig>();
 
-            loadedPictures.Add(new PictureConfig("img_one.png", 4000,5));
-            loadedPictures.Add(new PictureConfig("img_two.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_three.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_four.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_five.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_six.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_seven.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_eight.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_nine.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_ten.png", 4000, 5));
-            loadedPictures.Add(new PictureConfig("img_eleven.png", 4000, 5));
+            loadedPictures.Add(new PictureConfig("img_one.png", 4,5));
+            loadedPictures.Add(new PictureConfig("img_two.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_three.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_four.png", 4,5));
+            loadedPictures.Add(new PictureConfig("img_five.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_six.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_seven.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_eight.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_nine.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_ten.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_eleven.png", 4, 5));
 
             return loadedPictures;
         }
@@ -127,14 +126,6 @@ namespace MySlideShow.ViewModel
             await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
         }
 
-        private void PagePopped(object? sender, NavigationEventArgs args)
-        {
-            PictureConfig pictureConfig = new PictureConfig(photo, 5, 5);
-
-            // Handle any actions needed after returning from EditPicture
-            ListOfPictures.Add(pictureConfig);
-        }
-
         public async void GenerateShow()
         {
             slideShow = new SlideShow(ListOfPictures.ToList());
@@ -144,7 +135,7 @@ namespace MySlideShow.ViewModel
             // 
             slideShow.DisplayFirstImage();
 
-            await Task.Run(() => { Thread.Sleep(ListOfPictures[0].DisplayDuration); });
+            await Task.Run(() => { Thread.Sleep(ListOfPictures[0].DisplayDuration * 1000); });
 
             slideShow.StartSlideShow();
         }

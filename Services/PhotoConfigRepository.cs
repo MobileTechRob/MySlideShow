@@ -31,6 +31,20 @@ namespace MySlideShow.Services
             File.WriteAllText(fullPath, jsonPhotoConfigList);
         }
 
+        public void SavePhotos(List<PictureConfig> pictureConfigs)
+        {
+            if (File.Exists(fullPath) == false)
+            {
+                List<PictureConfig> listOfPictures = new();
+
+                foreach (PictureConfig pictureConfig in pictureConfigs)
+                    listOfPictures.Add(pictureConfig);
+
+                string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);
+                File.WriteAllText(fullPath, jsonPhotoConfigList);
+            }
+        }
+
         void IPhotoConfigRepository.DeletePhotos()
         {
             if (File.Exists(fullPath))
@@ -51,16 +65,30 @@ namespace MySlideShow.Services
             return listOfPictures;
         }
 
+       
+
         void IPhotoConfigRepository.SavePhoto(PictureConfig pictureConfig)
         {
             List<PictureConfig> listOfPictures = new();
 
             if (File.Exists(fullPath))
             {                
-                listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;                
-            }
+                listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;
 
-            listOfPictures.Add(pictureConfig);
+                SortedList<int, PictureConfig> sortedList = new();
+
+                foreach (PictureConfig pc in listOfPictures)                
+                    sortedList.Add(sortedList.Count, pc);
+
+                IEnumerable<KeyValuePair<int, PictureConfig>> keyValues= sortedList.Where(p => p.Value.FilePath == pictureConfig.FilePath);
+
+                sortedList[keyValues.First().Key] = pictureConfig;
+
+                listOfPictures = sortedList.Values.ToList<PictureConfig>();
+
+            }
+            else
+                listOfPictures.Add(pictureConfig);
 
             string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);
             File.WriteAllText(fullPath, jsonPhotoConfigList);   

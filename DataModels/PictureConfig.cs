@@ -10,9 +10,13 @@ namespace MySlideShow.DataModels
     {
         public string FilePath { get; set; }
         public int DisplayDuration { get; set; } // in seconds
-        public int TransitionTime { get; set; }
+        public uint TransitionTime { get; set; }
 
-        public PictureConfig(string filePath, int displayDuration, int transitionTime   )
+        public int DisplayDurationMs { get { return DisplayDuration * 1000; } } // in seconds
+        public uint TransitionTimeMs { get { return TransitionTime * 1000; } }
+
+
+        public PictureConfig(string filePath, int displayDuration, uint transitionTime   )
         {
             FilePath = filePath;
             DisplayDuration = displayDuration; // default duration
