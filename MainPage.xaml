@@ -2,6 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MySlideShow.MainPage">
+
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="evenTemplate">
+            <Grid BackgroundColor="LightGray">
+                <!-- Content for even rows -->
+                <Label Text="{Binding YourProperty}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="unevenTemplate">
+            <Grid BackgroundColor="White">
+                <!-- Content for uneven rows -->
+                <Label Text="{Binding YourProperty}" />
+            </Grid>
+        </DataTemplate>
+    </ContentPage.Resources>
+
     <Grid x:Name="CollectionLayout" Grid.Row="0">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Pics" Height="*"/>
