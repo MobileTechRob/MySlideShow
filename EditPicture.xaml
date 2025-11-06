@@ -31,9 +31,9 @@
         <Slider x:Name="Fader" Minimum="0"  Maximum="10" ValueChanged="Fader_ValueChanged" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" ></Slider>
                 
         <Label x:Name="Spacer" Grid.Row="4" Text=""></Label>
-        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="6" Grid.Column="0"  />
-        <Button Text="Save" Command="{Binding SaveChangesCommand}" Grid.Row="6" Grid.Column="1"  />
-        <Button Text="Delete" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="6" Grid.Column="3"  />
+        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="6" Grid.Column="0"  BackgroundColor="ForestGreen" />
+        <Button Text="Save" Command="{Binding SaveChangesCommand}" Grid.Row="6" Grid.Column="1"  BackgroundColor="ForestGreen" />
+        <Button Text="Delete" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="6" Grid.Column="3" BackgroundColor="ForestGreen" />
     </Grid>
 
         <!-- Content goes here -->

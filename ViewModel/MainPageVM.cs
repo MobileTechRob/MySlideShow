@@ -49,6 +49,7 @@ namespace MySlideShow.ViewModel
         public bool PhotosPresent { get { return _listOfPictures.Count > 0; } set { } } 
 
         public Command AddPictureCommand { get; set; }
+        public Command AddMusicCommand { get; set; }
         public Command GenerateShowCommand { get; set; }
         public Command SelectedPictureCommand { get; set; }
 
@@ -61,6 +62,7 @@ namespace MySlideShow.ViewModel
         public MainPageVM(ContentPage page, IPhotoConfigRepository photoConfigRepository)
         {
             AddPictureCommand = new Command(AddNewPicture);
+            AddMusicCommand = new Command(AddMusic);    
             SelectedPictureCommand = new Command(ShowPictureConfiguration);
             GenerateShowCommand = new Command(GenerateShow);
             ListOfPictures = new ObservableCollection<DataModels.PictureConfig>();
@@ -69,6 +71,13 @@ namespace MySlideShow.ViewModel
             _page = page;   
 
             RefreshPhotos();
+        }
+
+        public async void AddMusic()
+        {
+            // Logic to add music
+            string filePath = await SelectMusicAsync();
+
         }
 
         public void RefreshPhotos()
@@ -170,5 +179,44 @@ namespace MySlideShow.ViewModel
 
             return localFilePath;
         }
+
+        private async Task<string> SelectMusicAsync()
+        {
+            string localFilePath = string.Empty;
+
+            var customAudioFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+            {
+                { DevicePlatform.Android, new[] { "audio/*" } }
+            });
+
+            string s = "";
+
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    PickerTitle = "Select an audio file",
+                    FileTypes = customAudioFileType
+                });
+
+                if (result != null)
+                    return result.FullPath;
+            }
+            catch (Exception ex)
+            {
+                s = ex.ToString();
+                // Handle exceptions (permissions, not supported, etc.)
+            }
+
+            return localFilePath;
+        }
+
+
+
+
+
+
+
+
     }
 }
