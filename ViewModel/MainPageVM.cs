@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using MySlideShow.DataModels;
 using MySlideShow.Interfaces;
 
+
 namespace MySlideShow.ViewModel
 {
     public class MainPageVM : INotifyPropertyChanged
@@ -78,6 +79,8 @@ namespace MySlideShow.ViewModel
             // Logic to add music
             string filePath = await SelectMusicAsync();
 
+
+            _page.DisplayAlert("Music Selected", $"Selected music file: {filePath}", "OK");
         }
 
         public void RefreshPhotos()
@@ -87,8 +90,8 @@ namespace MySlideShow.ViewModel
           
             if (loadedPictures == null)            
             {
+                //return;
                 _photoConfigRepository.SavePhotos(LoadTempPhotos());
-
                 loadedPictures = _photoConfigRepository.LoadPhotos();
             }
 
@@ -102,17 +105,17 @@ namespace MySlideShow.ViewModel
         {
             List<PictureConfig> loadedPictures = new List<PictureConfig>();
 
-            loadedPictures.Add(new PictureConfig("img_one.png", 4,5));
-            loadedPictures.Add(new PictureConfig("img_two.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_three.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_four.png", 4,5));
-            loadedPictures.Add(new PictureConfig("img_five.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_six.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_seven.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_eight.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_nine.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_ten.png", 4, 5));
-            loadedPictures.Add(new PictureConfig("img_eleven.png", 4, 5));
+            loadedPictures.Add(new PictureConfig("img_one.png", 4,1));
+            loadedPictures.Add(new PictureConfig("img_two.png", 3, 2));
+            loadedPictures.Add(new PictureConfig("img_three.png", 2, 7));
+            loadedPictures.Add(new PictureConfig("img_four.png", 5,2));
+            loadedPictures.Add(new PictureConfig("img_five.png", 6, 1));
+            loadedPictures.Add(new PictureConfig("img_six.png", 7, 3));
+            loadedPictures.Add(new PictureConfig("img_seven.png", 8, 1));
+            loadedPictures.Add(new PictureConfig("img_eight.png", 9, 4));
+            //loadedPictures.Add(new PictureConfig("img_nine.png", 4, 5));
+            //loadedPictures.Add(new PictureConfig("img_ten.png", 4, 5));
+            //loadedPictures.Add(new PictureConfig("img_eleven.png", 4, 5));
 
             return loadedPictures;
         }
@@ -130,6 +133,11 @@ namespace MySlideShow.ViewModel
             // Logic to add a picture
             photo = await SelectPhotoAsync();
 
+            if (photo == string.Empty)
+            {
+                photo = DateTime.Now.Ticks.ToString();
+            }
+
             PictureConfig pictureConfig = new PictureConfig(photo, 5,5);
 
             await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
@@ -144,9 +152,9 @@ namespace MySlideShow.ViewModel
             // 
             slideShow.DisplayFirstImage();
 
-            await Task.Run(() => { Thread.Sleep(ListOfPictures[0].DisplayDuration * 1000); });
+            
 
-            slideShow.StartSlideShow();
+            slideShow.StartSlideShow(_page);
         }
 
         private void PushPage()
@@ -189,8 +197,6 @@ namespace MySlideShow.ViewModel
                 { DevicePlatform.Android, new[] { "audio/*" } }
             });
 
-            string s = "";
-
             try
             {
                 var result = await FilePicker.PickAsync(new PickOptions
@@ -204,7 +210,6 @@ namespace MySlideShow.ViewModel
             }
             catch (Exception ex)
             {
-                s = ex.ToString();
                 // Handle exceptions (permissions, not supported, etc.)
             }
 

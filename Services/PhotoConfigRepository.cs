@@ -82,7 +82,14 @@ namespace MySlideShow.Services
 
                 IEnumerable<KeyValuePair<int, PictureConfig>> keyValues= sortedList.Where(p => p.Value.FilePath == pictureConfig.FilePath);
 
-                sortedList[keyValues.First().Key] = pictureConfig;
+                if (keyValues.Any())
+                {
+                    sortedList[keyValues.First().Key] = pictureConfig;                    
+                }
+                else
+                {
+                    sortedList.Add(sortedList.Count, pictureConfig);
+                }
 
                 listOfPictures = sortedList.Values.ToList<PictureConfig>();
 
