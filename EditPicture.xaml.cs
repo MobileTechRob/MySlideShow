@@ -12,17 +12,21 @@ public partial class EditPicture : ContentPage
         BindingContext = new ViewModel.EditPictureVM(page, pictureConfig, photoConfigRepository);
     }
 
-    private void DurationEditor_TextChanged(object sender, TextChangedEventArgs e)
+
+    private void DisplayTime_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        if (DurationEditor != null) 
+        int displayTime = (int)e.NewValue;
+
+        string displayTimeAsString = displayTime.ToString("D1").Trim('0'); ;
+
+        if (displayTime == 10) 
+            displayTimeAsString = displayTime.ToString("D2");
+
+        DisplayTimeLabel.Text = "Display secs: " + displayTimeAsString;
+
+        if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
-            if (int.TryParse(DurationEditor.Text, out int duration))
-            {
-                if (BindingContext is ViewModel.EditPictureVM editPictureVM)
-                {
-                    editPictureVM.PictureConfig.DisplayDuration = duration;
-                }
-            }
+            editPictureVM.PictureConfig.DisplayDuration = (int)e.NewValue;
         }
     }
 
@@ -32,12 +36,10 @@ public partial class EditPicture : ContentPage
 
         TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D1");
 
-        if (timeSeconds == 10) 
-            TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D2");
-
         if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
             editPictureVM.PictureConfig.TransitionTime = timeSeconds;
         }
     }
+
 }

@@ -71,6 +71,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="com.companyname.myslideshow.apk" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="Animation\MyAnimation.cs" />
 	</ItemGroup>
 

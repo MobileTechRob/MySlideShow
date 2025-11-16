@@ -90,9 +90,9 @@ namespace MySlideShow.ViewModel
           
             if (loadedPictures == null)            
             {
-                //return;
-                _photoConfigRepository.SavePhotos(LoadTempPhotos());
-                loadedPictures = _photoConfigRepository.LoadPhotos();
+                return;
+                //_photoConfigRepository.SavePhotos(LoadTempPhotos());
+                //loadedPictures = _photoConfigRepository.LoadPhotos();
             }
 
             foreach (var pic in loadedPictures)

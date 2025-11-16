@@ -16,6 +16,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,16 +26,16 @@
         </Grid.ColumnDefinitions>
 
         <Image x:Name="PictureImage" Source="{Binding PictureConfig.FilePath}" Aspect="AspectFit"  WidthRequest="500" HeightRequest="500" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
-        <Label x:Name="FilePathLabel" Text="  Display Duration (secs): " Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" />
-        <Editor x:Name="DurationEditor" Placeholder="Duration" Text="{Binding PictureConfig.DisplayDuration}" TextChanged="DurationEditor_TextChanged" HorizontalTextAlignment="Start" AutoSize="TextChanges" Grid.Row="2" Grid.Column="0" />
-        <Label x:Name="TransitionLabel" Text="Transition secs: 0" Grid.Row="3" Grid.Column="0" ></Label>
-        
-        <Slider x:Name="Fader" Minimum="0"  Maximum="10" ValueChanged="Fader_ValueChanged" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" ></Slider>
+        <Label x:Name="ImageSpacer" Text="  " Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  />
+        <Label x:Name="DisplayTimeLabel" Text=" DisplayTime secs: 0" Grid.Row="2" Grid.Column="0" ></Label>
+        <Slider x:Name="DisplayTime" Minimum="0"  Maximum="10" ValueChanged="DisplayTime_ValueChanged"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" ></Slider>
+        <Label x:Name="TransitionLabel" Text=" Transition secs: 0" Grid.Row="4" Grid.Column="0" ></Label>
+        <Slider x:Name="FadeTime" Minimum="0"  Maximum="5"  ValueChanged="Fader_ValueChanged" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" ></Slider>
                 
-        <Label x:Name="Spacer" Grid.Row="4" Text=""></Label>
-        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="6" Grid.Column="0"  BackgroundColor="ForestGreen" />
-        <Button Text="Save" Command="{Binding SaveChangesCommand}" Grid.Row="6" Grid.Column="1"  BackgroundColor="ForestGreen" />
-        <Button Text="Delete" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="6" Grid.Column="3" BackgroundColor="ForestGreen" />
+        <Label x:Name="ButtonSpacer" Grid.Row="6" Text=""></Label>
+        <Button Text="Change Picture" Command="{Binding ChangePictureCommand}" Grid.Row="8" Grid.Column="0"  BackgroundColor="ForestGreen" />
+        <Button Text="Save" Command="{Binding SaveChangesCommand}" Grid.Row="8" Grid.Column="1"  BackgroundColor="ForestGreen" />
+        <Button Text="Delete" Command="{Binding DeleteEntryCommand}" CommandParameter="{Binding PictureConfig}" Grid.Row="8" Grid.Column="3" BackgroundColor="ForestGreen" />
     </Grid>
 
         <!-- Content goes here -->
