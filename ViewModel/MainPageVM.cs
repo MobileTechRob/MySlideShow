@@ -59,6 +59,8 @@ namespace MySlideShow.ViewModel
         ContentPage _page;
 
         IPhotoConfigRepository _photoConfigRepository;
+        List<PictureConfig> loadedPictures;
+
 
         public MainPageVM(ContentPage page, IPhotoConfigRepository photoConfigRepository)
         {
@@ -71,7 +73,7 @@ namespace MySlideShow.ViewModel
             _photoConfigRepository = photoConfigRepository!;         
             _page = page;   
 
-            RefreshPhotos();
+            RefreshPhotos();                      
         }
 
         public async void AddMusic()
@@ -85,7 +87,7 @@ namespace MySlideShow.ViewModel
 
         public void RefreshPhotos()
         {
-            List<PictureConfig> loadedPictures = _photoConfigRepository.LoadPhotos();          
+            loadedPictures = _photoConfigRepository.LoadPhotos();          
             ListOfPictures.Clear();
           
             if (loadedPictures == null)            
