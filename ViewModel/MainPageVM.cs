@@ -53,6 +53,7 @@ namespace MySlideShow.ViewModel
         public Command AddMusicCommand { get; set; }
         public Command GenerateShowCommand { get; set; }
         public Command SelectedPictureCommand { get; set; }
+        public Command DeletePictureCommand { get; set; }
 
         SlideShow slideShow;
 
@@ -68,6 +69,7 @@ namespace MySlideShow.ViewModel
             AddMusicCommand = new Command(AddMusic);    
             SelectedPictureCommand = new Command(ShowPictureConfiguration);
             GenerateShowCommand = new Command(GenerateShow);
+
             ListOfPictures = new ObservableCollection<DataModels.PictureConfig>();
 
             _photoConfigRepository = photoConfigRepository!;         
@@ -89,17 +91,22 @@ namespace MySlideShow.ViewModel
         {
             loadedPictures = _photoConfigRepository.LoadPhotos();          
             ListOfPictures.Clear();
-          
-            if (loadedPictures == null)            
+
+            if (loadedPictures == null)
             {
                 return;
                 //_photoConfigRepository.SavePhotos(LoadTempPhotos());
                 //loadedPictures = _photoConfigRepository.LoadPhotos();
             }
+            else
+            {
+                if (!_photoConfigRepository.VerifyFile())
+                    return;
+            }
 
             foreach (var pic in loadedPictures)
             {
-                ListOfPictures.Add(pic);
+               ListOfPictures.Add(pic);
             }          
         }
 
@@ -132,17 +139,45 @@ namespace MySlideShow.ViewModel
 
         public async void AddNewPicture()
         {
+            PictureConfig pictureConfig = null;
             // Logic to add a picture
-            photo = await SelectPhotoAsync();
+            string photo = await SelectPhotoAsync();
 
-            if (photo == string.Empty)
+            if (System.Diagnostics.Debugger.IsAttached)
             {
-                photo = DateTime.Now.Ticks.ToString();
+                // Code to run only when debugging
+                if (string.IsNullOrEmpty(photo))
+                {
+                    if (loadedPictures == null)
+                        photo = "img_1.png";
+                    else
+                    {
+                        int count = loadedPictures.Count + 1;
+                        photo = "img_" + count.ToString() + ".png";
+                    }
+                    
+                    pictureConfig = new PictureConfig(photo);
+                }
             }
-
-            PictureConfig pictureConfig = new PictureConfig(photo, 5,5);
-
+            else if (!string.IsNullOrEmpty(photo))
+            {
+                // User cancelled or no photo selected
+                pictureConfig = new PictureConfig(photo, 5, 5);
+            }
+            
             await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
+        }
+
+        public void DeletePicture(object sender)
+        {
+            ImageButton button = (ImageButton)sender;
+            PictureConfig pictureConfig = (PictureConfig)button.BindingContext;
+
+            _photoConfigRepository.DeletePhoto(pictureConfig);
+
+            RefreshPhotos();
+            
+            OnPropertyChanged(nameof(ListOfPictures));
         }
 
         public async void GenerateShow()
@@ -152,10 +187,8 @@ namespace MySlideShow.ViewModel
 
             // Logic to generate the slideshow
             // 
-            slideShow.DisplayFirstImage();
-
-            
-
+            //slideShow.DisplayFirstImage();
+         
             slideShow.StartSlideShow(_page);
         }
 

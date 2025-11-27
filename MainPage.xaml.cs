@@ -26,5 +26,10 @@ namespace MySlideShow
             mainPageVM.RefreshPhotos();
             GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
         }
+
+        private void DeleteImageButton_Clicked(object sender, EventArgs e)
+        {
+            mainPageVM.DeletePicture(sender);
+        }
     }
 }

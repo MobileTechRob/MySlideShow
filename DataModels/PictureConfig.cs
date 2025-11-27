@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MySlideShow.DataModels
 {
@@ -16,14 +17,15 @@ namespace MySlideShow.DataModels
         public string TransitionTimeText { get { return " Transition Time (secs): " + TransitionTime.ToString(); } }
 
         public int DisplayDurationMs { get { return DisplayDuration * 1000; } } // in seconds
-        public uint TransitionTimeMs { get { return TransitionTime * 1000; } }
+        public uint TransitionTimeMs { get { return TransitionTime * 1000; } }        
+        public Guid Id {  get; set; }   
 
-
-        public PictureConfig(string filePath, int displayDuration, uint transitionTime   )
+        public PictureConfig(string filePath, int displayDuration =5, uint transitionTime = 5)
         {
             FilePath = filePath;
             DisplayDuration = displayDuration; // default duration
-            TransitionTime = transitionTime;
+            TransitionTime = transitionTime;          
+            Id = Guid.NewGuid();
         }
     }
 }

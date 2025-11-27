@@ -8,14 +8,14 @@
         <toolkit:StatusBarBehavior StatusBarColor="ForestGreen"/>
     </ContentPage.Behaviors>
     <Grid>
-        <Grid VerticalOptions="Start">
+        <Grid VerticalOptions="Center">
             <Grid.RowDefinitions>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
             </Grid.ColumnDefinitions>
-            <Image x:Name="SlideShowImageOne" Aspect="AspectFit" Opacity="0" />
+            <Image x:Name="SlideShowImageOne" Aspect="AspectFit"  Opacity="0" />
         </Grid>
-        <Grid VerticalOptions="Start">
+        <Grid VerticalOptions="Center">
             <Grid.RowDefinitions>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>

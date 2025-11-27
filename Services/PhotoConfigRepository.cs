@@ -19,7 +19,7 @@ namespace MySlideShow.Services
         {
             List<PictureConfig> listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;
 
-            listOfPictures.RemoveAll(pic => pic.FilePath == picConfig.FilePath);
+            listOfPictures.RemoveAll(pic => pic.Id == picConfig.Id);
 
             if (listOfPictures.Count == 0)
             {
@@ -45,6 +45,28 @@ namespace MySlideShow.Services
             }
         }
 
+        bool IPhotoConfigRepository.VerifyFile()
+        {
+            if (File.Exists(fullPath) == false)
+            {
+                return false;
+            }
+;
+            List<PictureConfig> listOfPictures = new();
+            listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;
+
+            if (listOfPictures != null && listOfPictures.Count >= 1)
+            {
+                if (listOfPictures.Where(pic => File.Exists(pic.FilePath) == false).Count<PictureConfig>() >= 1)
+                {
+                    File.Delete(fullPath);
+                    return false; 
+                }            
+            }
+
+            return true;
+        }
+
         void IPhotoConfigRepository.DeletePhotos()
         {
             if (File.Exists(fullPath))
@@ -60,13 +82,12 @@ namespace MySlideShow.Services
                 return null!;
             }
 ;
-            List<PictureConfig> listOfPictures = new();
+            List<PictureConfig> listOfPictures = new();            
             listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;   
             return listOfPictures;
         }
 
-       
-
+      
         void IPhotoConfigRepository.SavePhoto(PictureConfig pictureConfig)
         {
             List<PictureConfig> listOfPictures = new();
