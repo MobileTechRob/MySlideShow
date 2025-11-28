@@ -58,19 +58,12 @@
     <Grid x:Name="CollectionLayout" Grid.Row="0">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Pics" Height="Auto" />
-            <RowDefinition x:Name="Button" Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <CollectionView x:Name="PictureCollection" ItemTemplate="{x:StaticResource alternateColorDataTemplateSelector}" SelectionMode="Single" MinimumHeightRequest="700" SelectionChangedCommand="{Binding SelectedPictureCommand}"  SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference PictureCollection}}" ItemsSource="{Binding ListOfPictures}" VerticalScrollBarVisibility="Always" Grid.Row="0" Grid.ColumnSpan="3">
+        <CollectionView x:Name="PictureCollection" ItemTemplate="{x:StaticResource alternateColorDataTemplateSelector}" SelectionMode="Single" MinimumHeightRequest="700" SelectionChangedCommand="{Binding SelectedPictureCommand}"  SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference PictureCollection}}" ItemsSource="{Binding ListOfPictures}" VerticalScrollBarVisibility="Always" Grid.Row="0" Grid.Column="0">
         </CollectionView>
-
-        <Button Text="Add Picture"  x:Name="AddPictureButton" BackgroundColor="ForestGreen" Command="{Binding AddPictureCommand}" Grid.Row="1" Grid.Column="0" />
-        <Button Text="Add Music"  x:Name="AddMusicButton" BackgroundColor="ForestGreen" Command="{Binding AddMusicCommand}" Grid.Row="1" Grid.Column="1" />
-        <Button Text="Generate Show" x:Name="GeneratePictureButton" BackgroundColor="ForestGreen" Command="{Binding GenerateShowCommand}" Grid.Row="1" Grid.Column="2" />
     </Grid>
 </ContentPage>

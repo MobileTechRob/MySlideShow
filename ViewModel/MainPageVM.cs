@@ -49,9 +49,9 @@ namespace MySlideShow.ViewModel
 
         public bool PhotosPresent { get { return _listOfPictures.Count > 0; } set { } } 
 
-        public Command AddPictureCommand { get; set; }
+        //public Command AddPictureCommand { get; set; }
         public Command AddMusicCommand { get; set; }
-        public Command GenerateShowCommand { get; set; }
+        //public Command GenerateShowCommand { get; set; }
         public Command SelectedPictureCommand { get; set; }
         public Command DeletePictureCommand { get; set; }
 
@@ -64,11 +64,10 @@ namespace MySlideShow.ViewModel
 
 
         public MainPageVM(ContentPage page, IPhotoConfigRepository photoConfigRepository)
-        {
-            AddPictureCommand = new Command(AddNewPicture);
+        {          
             AddMusicCommand = new Command(AddMusic);    
             SelectedPictureCommand = new Command(ShowPictureConfiguration);
-            GenerateShowCommand = new Command(GenerateShow);
+            //GenerateShowCommand = new Command(GenerateShow);
 
             ListOfPictures = new ObservableCollection<DataModels.PictureConfig>();
 
@@ -180,17 +179,17 @@ namespace MySlideShow.ViewModel
             OnPropertyChanged(nameof(ListOfPictures));
         }
 
-        public async void GenerateShow()
-        {
-            slideShow = new SlideShow(ListOfPictures.ToList());
-            await _page.Navigation.PushAsync(slideShow);
+        //public async void GenerateShow()
+        //{
+        //    slideShow = new SlideShow(ListOfPictures.ToList());
+        //    await _page.Navigation.PushAsync(slideShow);
 
-            // Logic to generate the slideshow
-            // 
-            //slideShow.DisplayFirstImage();
+        //    // Logic to generate the slideshow
+        //    // 
+        //    //slideShow.DisplayFirstImage();
          
-            slideShow.StartSlideShow(_page);
-        }
+        //    slideShow.StartSlideShow(_page);
+        //}
 
         private void PushPage()
         {

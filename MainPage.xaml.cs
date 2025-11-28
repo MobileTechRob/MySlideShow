@@ -15,7 +15,7 @@ namespace MySlideShow
             mainPageVM = new ViewModel.MainPageVM(this, photoConfigRepository);            
             BindingContext = mainPageVM;
 
-            GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
         }
 
         protected override void OnAppearing()
@@ -24,13 +24,13 @@ namespace MySlideShow
 
             // Additional logic can be added here if needed when the page appears
             mainPageVM.RefreshPhotos();
-            GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
         }
 
         private void DeleteImageButton_Clicked(object sender, EventArgs e)
         {
             mainPageVM.DeletePicture(sender);
-            GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
         }
     }
 }

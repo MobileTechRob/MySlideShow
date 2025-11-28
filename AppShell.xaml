@@ -15,4 +15,9 @@
     <FlyoutItem Title="Add Picture">
         <ShellContent ContentTemplate="{DataTemplate local:EditPicture}"  />
     </FlyoutItem>
+
+    <FlyoutItem Title="Generate Slide Show">
+        <ShellContent ContentTemplate="{DataTemplate local:SlideShow}"  />
+    </FlyoutItem>
+
 </Shell>

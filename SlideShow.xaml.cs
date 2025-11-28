@@ -1,4 +1,5 @@
 using MySlideShow.DataModels;
+using MySlideShow.Interfaces;
 using System;
 using System.Threading.Tasks;
 namespace MySlideShow;
@@ -17,12 +18,32 @@ public partial class SlideShow : ContentPage
     int loopCount = 0;
     bool waitForTransition = false;
 
+    IPhotoConfigRepository _photoConfigRepository;
+
+    public SlideShow()
+    {
+        InitializeComponent();
+    }
+
+
     public SlideShow(List<PictureConfig> pictureConfigs)
 	{
 		InitializeComponent();
 
         _pictureConfigs = pictureConfigs;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        _photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
+
+        _pictureConfigs = _photoConfigRepository.LoadPhotos();
+
+        StartSlideShow(this);
+    }   
+
 
     public async void DisplayFirstImage()
     {
@@ -157,7 +178,9 @@ public partial class SlideShow : ContentPage
 
     private void RepeatOrNot(double d, bool b)
     { 
-        _page.Navigation.PopAsync();
+        //_page.Navigation.PopAsync();
+
+        Shell.Current.GoToAsync("//MainPage");
     }
 
     private bool EndSlideShow() 
