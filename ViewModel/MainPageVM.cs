@@ -101,7 +101,7 @@ namespace MySlideShow.ViewModel
             else
             {
                 if (!_photoConfigRepository.VerifyFile())
-                    return;
+                  return;
             }
 
             foreach (var pic in loadedPictures)
@@ -250,13 +250,5 @@ namespace MySlideShow.ViewModel
 
             return localFilePath;
         }
-
-
-
-
-
-
-
-
     }
 }

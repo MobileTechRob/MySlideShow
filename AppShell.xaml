@@ -11,4 +11,8 @@
         Title="Slide Show"       
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
+
+    <FlyoutItem Title="Add Picture">
+        <ShellContent ContentTemplate="{DataTemplate local:EditPicture}"  />
+    </FlyoutItem>
 </Shell>
