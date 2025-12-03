@@ -23,7 +23,8 @@
                 <Image Source="{Binding FilePath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" Grid.Column="0" Grid.RowSpan="2"/>
                 <Label Text="{Binding DisplayDurationText}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
                 <Label Text="{Binding TransitionTimeText}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
-                <Image Source="transparent_50_50.png" Grid.RowSpan="2" Grid.Column="3" HeightRequest="50" WidthRequest="50"></Image>
+                <ImageButton Source="green_up_arrow_hd.png" Grid.Row="0" Grid.Column="3" HeightRequest="50" WidthRequest="50"></ImageButton>
+                <ImageButton Source="green_down_arrow_hd.png" Grid.Row="1" Grid.Column="3" HeightRequest="50" WidthRequest="50"></ImageButton>
                 <ImageButton Source="garbage_can.png" IsEnabled="True" Clicked="DeleteImageButton_Clicked"  HeightRequest="50" WidthRequest="50" Aspect="AspectFit"  Grid.Column="4" Grid.RowSpan="2"/>
             </Grid>
         </DataTemplate>
@@ -45,7 +46,8 @@
                 <Image Source="{Binding FilePath}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" Grid.Column="0" Grid.RowSpan="2"/>
                 <Label Text="{Binding DisplayDurationText}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
                 <Label Text="{Binding TransitionTimeText}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
-                <Image Source="transparent_50_50.png" Grid.RowSpan="2" Grid.Column="3"  HeightRequest="50" WidthRequest="50"></Image>
+                <ImageButton Source="green_up_arrow_hd.png" Grid.Row="0" Grid.Column="3"  HeightRequest="50" WidthRequest="50"></ImageButton>
+                <ImageButton Source="green_down_arrow_hd.png" Grid.Row="1" Grid.Column="3"  HeightRequest="50" WidthRequest="50"></ImageButton>
                 <ImageButton Source="garbage_can.png" IsEnabled="True" Clicked="DeleteImageButton_Clicked"  HeightRequest="50" WidthRequest="50" Aspect="AspectFit" Grid.Column="4" Grid.RowSpan="2"/>
             </Grid>
         </DataTemplate>

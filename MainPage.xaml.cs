@@ -13,9 +13,7 @@ namespace MySlideShow
             InitializeComponent();
             IPhotoConfigRepository photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
             mainPageVM = new ViewModel.MainPageVM(this, photoConfigRepository);            
-            BindingContext = mainPageVM;
-
-            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            BindingContext = mainPageVM;            
         }
 
         protected override void OnAppearing()
@@ -23,14 +21,12 @@ namespace MySlideShow
             base.OnAppearing();
 
             // Additional logic can be added here if needed when the page appears
-            mainPageVM.RefreshPhotos();
-            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            mainPageVM.RefreshPhotos();           
         }
 
         private void DeleteImageButton_Clicked(object sender, EventArgs e)
         {
-            mainPageVM.DeletePicture(sender);
-            //GeneratePictureButton.IsEnabled = mainPageVM.PhotosPresent;
+            mainPageVM.DeletePicture(sender);            
         }
     }
 }
