@@ -14,7 +14,6 @@ public partial class SlideShow : ContentPage
     Animation pictureTwo;
     int imageToFadeOut;
 
-    ContentPage _page;
     int loopCount = 0;
     bool waitForTransition = false;
 
@@ -35,27 +34,26 @@ public partial class SlideShow : ContentPage
 
     protected override void OnAppearing()
     {
-        base.OnAppearing();
-
         _photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
-
         _pictureConfigs = _photoConfigRepository.LoadPhotos();
+
+        if ((_pictureConfigs == null) || (_pictureConfigs != null && _pictureConfigs.Count == 0))
+            return;
 
         StartSlideShow(this);
     }   
 
 
-    public async void DisplayFirstImage()
-    {
-        SlideShowImageOne.Source = _pictureConfigs[0].FilePath;
-        SlideShowImageOne.Opacity = 1;
+    //public async void DisplayFirstImage()
+    //{
+    //    SlideShowImageOne.Source = _pictureConfigs[0].FilePath;
+    //    SlideShowImageOne.Opacity = 1;
 
-        await Task.Run(() => Thread.Sleep(_pictureConfigs[0].DisplayDurationMs));
-    }
+    //    await Task.Run(() => Thread.Sleep(_pictureConfigs[0].DisplayDurationMs));
+    //}
 
     public void StartSlideShow(ContentPage page)
-    {
-        _page = page;
+    {     
         loopCount = -1;
 
         StartAnimation(0, true);
@@ -118,14 +116,11 @@ public partial class SlideShow : ContentPage
             SlideShowImageTwo.Source = _pictureConfigs[loopCount + 1].FilePath;
             Animation pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 0, 1);            
             parentAnimation.Add(0, 1, pictureTwo);
-            parentAnimation.Commit(this, "Transition1", 32, _pictureConfigs[loopCount + 1].TransitionTimeMs, null, Animation_Completed, null);              
+            parentAnimation.Commit(this, "Transition1", 32, _pictureConfigs[loopCount + 1].FadeTimeMs, null, Animation_Completed, null);              
         }
         else 
         {
-            SlideShowImageTwo.Source = _pictureConfigs[loopCount].FilePath;
-            Animation pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 0, 1);
-            parentAnimation.Add(0, 1, pictureTwo);
-            parentAnimation.Commit(this, "Transition1", 32, _pictureConfigs[loopCount].TransitionTimeMs, null, TransitionFunctionCallBack_FadeOut, null);            
+            TransitionFunctionCallBack_FadeOut(1);
         }        
     }
 
@@ -142,14 +137,11 @@ public partial class SlideShow : ContentPage
             SlideShowImageOne.Source = _pictureConfigs[loopCount + 1].FilePath;
             pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 0, 1);
             parentAnimation2.Add(0, 1, pictureOne);
-            parentAnimation2.Commit(this, "Transition2", 32, _pictureConfigs[loopCount + 1].TransitionTimeMs, null, Animation_Completed, null);          
+            parentAnimation2.Commit(this, "Transition2", 32, _pictureConfigs[loopCount + 1].FadeTimeMs, null, Animation_Completed, null);          
         }
         else  // no more images, fade out.
         {
-            SlideShowImageOne.Source = _pictureConfigs[loopCount].FilePath;
-            pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 0, 1);
-            parentAnimation2.Add(0, 1, pictureOne);
-            parentAnimation2.Commit(this, "Transition2", 32, _pictureConfigs[loopCount].TransitionTimeMs, null, TransitionFunctionCallBack_FadeOut, null);            
+            TransitionFunctionCallBack_FadeOut(2);
         }
     }
 
@@ -162,18 +154,28 @@ public partial class SlideShow : ContentPage
         StartAnimation(0, true);
     }
 
-    private async void TransitionFunctionCallBack_FadeOut(double d, bool b)
+    private void TransitionFunctionCallBack_FadeOut(int imageNumber)
     {
-        loopCount = _pictureConfigs.Count - 1;
+        //loopCount = _pictureConfigs.Count - 1;
 
-        await Task.Run(() => { Thread.Sleep(_pictureConfigs[loopCount].DisplayDurationMs); });
+        //await Task.Run(() => { Thread.Sleep(_pictureConfigs[loopCount].DisplayDurationMs); });
 
         parentAnimation2 = new Animation();
-        SlideShowImageOne.Source = _pictureConfigs[loopCount].FilePath;
-        pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);
 
-        parentAnimation2.Add(0, 1, pictureOne);
-        parentAnimation2.Commit(this, "Transition3", 32, _pictureConfigs[loopCount].TransitionTimeMs, null, RepeatOrNot, null);
+        if (imageNumber == 1)
+        {
+            SlideShowImageOne.Source = _pictureConfigs[loopCount].FilePath;
+            pictureOne = new Animation(v => { SlideShowImageOne.Opacity = v; }, 1, 0);
+            parentAnimation2.Add(0, 1, pictureOne);
+        }
+        else
+        { 
+            SlideShowImageTwo.Source = _pictureConfigs[loopCount].FilePath;
+            pictureTwo = new Animation(v => { SlideShowImageTwo.Opacity = v; }, 1, 0);
+            parentAnimation2.Add(0, 1, pictureTwo);
+        }
+
+        parentAnimation2.Commit(this, "Transition3", 32, _pictureConfigs[loopCount].FadeTimeMs, null, RepeatOrNot, null);
     }
 
     private void RepeatOrNot(double d, bool b)

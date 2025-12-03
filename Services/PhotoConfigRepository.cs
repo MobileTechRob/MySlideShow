@@ -57,6 +57,10 @@ namespace MySlideShow.Services
 
             if (listOfPictures != null && listOfPictures.Count >= 1)
             {
+
+                if (listOfPictures[0].FilePath.StartsWith("img_"))
+                    return true;
+
                 if (listOfPictures.Where(pic => File.Exists(pic.FilePath) == false).Count<PictureConfig>() >= 1)
                 {
                     File.Delete(fullPath);
@@ -83,7 +87,8 @@ namespace MySlideShow.Services
             }
 ;
             List<PictureConfig> listOfPictures = new();            
-            listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(File.ReadAllText(fullPath))!;   
+            string jsonFromFile = File.ReadAllText(fullPath);
+            listOfPictures = JsonSerializer.Deserialize<List<PictureConfig>>(jsonFromFile)!;   
             return listOfPictures;
         }
 

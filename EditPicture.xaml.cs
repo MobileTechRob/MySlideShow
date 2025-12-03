@@ -9,13 +9,17 @@ public partial class EditPicture : ContentPage
     
     IPhotoConfigRepository photoConfigRepository;
     List<PictureConfig> loadedPictures;
+    bool editPicture = false;
+    PictureConfig pictureConfig = null;
+
 
     public EditPicture()
     {
         InitializeComponent();
         
         photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
-        //BindingContext = new ViewModel.EditPictureVM(this, null, photoConfigRepository);
+
+        loadedPictures = photoConfigRepository.LoadPhotos();
     }
 
     public EditPicture(ContentPage page, PictureConfig pictureConfig)
@@ -23,33 +27,26 @@ public partial class EditPicture : ContentPage
         InitializeComponent();
         photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
 
-        loadedPictures = photoConfigRepository.LoadPhotos(); 
+        this.pictureConfig = pictureConfig;
 
         BindingContext = new ViewModel.EditPictureVM(page, pictureConfig, photoConfigRepository);
+        editPicture = true;
     }
 
    
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-
-        //if (BindingContext is ViewModel.EditPictureVM editPictureVM)
-        //{
-        PictureConfig pictureConfig = await AddNewPicture();
-
+        if (!editPicture)
+        {
+            pictureConfig = await AddNewPicture();
+        }
+        
         BindingContext = new ViewModel.EditPictureVM(this, pictureConfig, photoConfigRepository);
-
-        //          editPictureVM.PictureConfig = AddNewPicture().Result ?? editPictureVM.PictureConfig;
-
-        //int displayTime = editPictureVM.PictureConfig.DisplayDuration;
-        //DisplayTimeSlider.Value = displayTime;
-        //DisplayTimeLabel.Text = "Display secs: " + (displayTime == 10 ? displayTime.ToString("D2") : displayTime.ToString("D1").Trim('0'));
-        //uint transitionTime = editPictureVM.PictureConfig.TransitionTime;
-        //FaderSlider.Value = transitionTime;
-        //TransitionLabel.Text = "Transition secs: " + transitionTime.ToString("D1");
-        //}
+        
+        DisplayTime.Value = pictureConfig.DisplayDuration;
+        FadeTime.Value = pictureConfig.FadeTime;
     }
-
+   
     public async Task<PictureConfig> AddNewPicture()
     {
         PictureConfig pictureConfig = null;
@@ -75,7 +72,7 @@ public partial class EditPicture : ContentPage
         else if (!string.IsNullOrEmpty(photo))
         {
             // User cancelled or no photo selected
-            pictureConfig = new PictureConfig(photo, 5, 5);
+            pictureConfig = new PictureConfig(photo, 1, 1);
         } 
         
         return pictureConfig;
@@ -112,16 +109,14 @@ public partial class EditPicture : ContentPage
     {
         int displayTime = (int)e.NewValue;
 
-        string displayTimeAsString = displayTime.ToString("D1").Trim('0'); ;
+        if (displayTime <= 0)
+            displayTime = 1;
 
-        if (displayTime == 10) 
-            displayTimeAsString = displayTime.ToString("D2");
-
-        DisplayTimeLabel.Text = "Display secs: " + displayTimeAsString;
+        DisplayTimeLabel.Text = "Display secs: " + displayTime.ToString("D1");
 
         if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
-            editPictureVM.PictureConfig.DisplayDuration = (int)e.NewValue;
+            editPictureVM.PictureConfig.DisplayDuration = displayTime;
         }
     }
 
@@ -129,11 +124,14 @@ public partial class EditPicture : ContentPage
     {
         uint timeSeconds = (uint)e.NewValue;
 
+        if (timeSeconds <= 0)
+            timeSeconds = 1;
+
         TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D1");
 
         if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
-            editPictureVM.PictureConfig.TransitionTime = timeSeconds;
+            editPictureVM.PictureConfig.FadeTime = timeSeconds;
         }
     }
 

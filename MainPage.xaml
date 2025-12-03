@@ -55,9 +55,9 @@
         </local:AlternateColorDataTemplateSelector>
     </ContentPage.Resources>
 
-    <Grid x:Name="CollectionLayout" Grid.Row="0">
+    <Grid x:Name="CollectionLayout" Grid.Row="0" VerticalOptions="Fill">
         <Grid.RowDefinitions>
-            <RowDefinition x:Name="Pics" Height="Auto" />
+            <RowDefinition x:Name="Pics" Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
