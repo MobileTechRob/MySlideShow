@@ -179,6 +179,44 @@ namespace MySlideShow.ViewModel
             OnPropertyChanged(nameof(ListOfPictures));
         }
 
+        public void MovePictureUp(object sender)
+        {
+            // Logic to move picture up in the list
+            ImageButton button = (ImageButton)sender;
+            PictureConfig pictureConfig = (PictureConfig)button.BindingContext;
+            loadedPictures = _photoConfigRepository.LoadPhotos();
+
+            int picIndex = loadedPictures.FindIndex((pic) => pic.Id == pictureConfig.Id);   
+
+            if (picIndex > 0)
+            {
+                var temp = loadedPictures[picIndex - 1];
+                loadedPictures[picIndex - 1] = loadedPictures[picIndex];
+                loadedPictures[picIndex] = temp;
+                _photoConfigRepository.SavePhotos(loadedPictures);
+                RefreshPhotos();
+            }
+        }
+
+        public void MovePictureDown(object sender)
+        {
+            // Logic to move picture down in the list
+            ImageButton button = (ImageButton)sender;
+            PictureConfig pictureConfig = (PictureConfig)button.BindingContext;
+            loadedPictures = _photoConfigRepository.LoadPhotos();
+
+            int picIndex = loadedPictures.FindIndex((pic) => pic.Id == pictureConfig.Id);
+
+            if (picIndex < loadedPictures.Count - 1)
+            {
+                var temp = loadedPictures[picIndex + 1];
+                loadedPictures[picIndex + 1] = loadedPictures[picIndex];
+                loadedPictures[picIndex] = temp;
+                _photoConfigRepository.SavePhotos(loadedPictures);
+                RefreshPhotos();
+            }
+        }
+
         private void PushPage()
         {
             slideShow = new SlideShow(ListOfPictures.ToList());

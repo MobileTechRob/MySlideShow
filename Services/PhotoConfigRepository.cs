@@ -33,16 +33,13 @@ namespace MySlideShow.Services
 
         public void SavePhotos(List<PictureConfig> pictureConfigs)
         {
-            if (File.Exists(fullPath) == false)
-            {
-                List<PictureConfig> listOfPictures = new();
+             List<PictureConfig> listOfPictures = new();
 
-                foreach (PictureConfig pictureConfig in pictureConfigs)
-                    listOfPictures.Add(pictureConfig);
+             foreach (PictureConfig pictureConfig in pictureConfigs)
+                 listOfPictures.Add(pictureConfig);
 
-                string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);
-                File.WriteAllText(fullPath, jsonPhotoConfigList);
-            }
+             string jsonPhotoConfigList = JsonSerializer.Serialize<List<PictureConfig>>(listOfPictures);
+             File.WriteAllText(fullPath, jsonPhotoConfigList);
         }
 
         bool IPhotoConfigRepository.VerifyFile()

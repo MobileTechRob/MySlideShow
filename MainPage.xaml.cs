@@ -28,5 +28,15 @@ namespace MySlideShow
         {
             mainPageVM.DeletePicture(sender);            
         }
+
+        private void btnMoveUp_Clicked(object sender, EventArgs e)
+        {
+            mainPageVM.MovePictureUp(sender);
+        }
+
+        private void btnMoveDown_Clicked(object sender, EventArgs e)
+        {
+            mainPageVM.MovePictureDown(sender); 
+        }
     }
 }
