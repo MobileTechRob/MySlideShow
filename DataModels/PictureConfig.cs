@@ -18,13 +18,13 @@ namespace MySlideShow.DataModels
         public string DisplayDurationText { get { return " Display Time (secs): " + DisplayDuration.ToString(); } } // in seconds
 
         [JsonIgnore]
-        public string TransitionTimeText { get { return " Fade Time (secs): " + FadeTime.ToString(); } }
+        public string FadeTimeText { get { return " Fade Time (secs): " + FadeTime.ToString(); } }
 
         [JsonIgnore]
         public int DisplayDurationMs { get { return DisplayDuration * 1000; } } // in seconds
 
         [JsonIgnore]
-        public uint FadeTimeMs { get { return FadeTime * 1000; } }        
+        public uint FadeTimeMs { get { if (FadeTime == 0) return 250;  return FadeTime * 1000; } }        
         public Guid Id {  get; set; }   
 
         public PictureConfig()

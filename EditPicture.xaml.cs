@@ -112,7 +112,7 @@ public partial class EditPicture : ContentPage
         if (displayTime <= 0)
             displayTime = 1;
 
-        DisplayTimeLabel.Text = "Display secs: " + displayTime.ToString("D1");
+        DisplayTimeLabel.Text = "Display Time secs: " + displayTime.ToString("D1");
 
         if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
@@ -122,16 +122,13 @@ public partial class EditPicture : ContentPage
 
     private void Fader_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        uint timeSeconds = (uint)e.NewValue;
+        uint fadeTimeSeconds = (uint)e.NewValue;
 
-        if (timeSeconds <= 0)
-            timeSeconds = 1;
-
-        TransitionLabel.Text = "Transition secs: " + timeSeconds.ToString("D1");
+        TransitionLabel.Text = "Fade Time secs: " + fadeTimeSeconds.ToString("D1");
 
         if (BindingContext is ViewModel.EditPictureVM editPictureVM)
         {
-            editPictureVM.PictureConfig.FadeTime = timeSeconds;
+            editPictureVM.PictureConfig.FadeTime = fadeTimeSeconds;
         }
     }
 
