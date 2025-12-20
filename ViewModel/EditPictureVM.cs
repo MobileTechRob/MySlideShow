@@ -33,7 +33,7 @@ namespace MySlideShow.ViewModel
         public Command ChangePictureCommand { get; set; }
         public Command SaveChangesCommand { get; set; }
 
-        public Command DeleteEntryCommand { get; set; }
+        //public Command DeleteEntryCommand { get; set; }
 
         private ContentPage _page;
 
@@ -42,20 +42,12 @@ namespace MySlideShow.ViewModel
         public EditPictureVM(ContentPage page, PictureConfig pictureConfig, IPhotoConfigRepository photoConfigRepository)
         {
             _page = page;
+                       
             PictureConfig = pictureConfig;
             ChangePictureCommand = new Command(ChangePicture);
             SaveChangesCommand = new Command(SaveChanges);
-            DeleteEntryCommand = new Command(DeleteEntry);
+            
             _photoConfigRepository = photoConfigRepository;
-        }
-
-        public void DeleteEntry(object sender)
-        {
-            // Implementation for deleting the entry
-            PictureConfig pictureConfig = (PictureConfig)sender;
-
-            _photoConfigRepository.DeletePhoto(pictureConfig);
-            _page.Navigation.PopAsync();
         }
 
         public void ChangePicture()
@@ -94,8 +86,7 @@ namespace MySlideShow.ViewModel
         {
             _photoConfigRepository.SavePhoto(PictureConfig);
 
-            // Implementation for saving changes    
-            _page.Navigation.PopAsync();
+            Shell.Current.GoToAsync("//MainPage");
         }
     }
 }
