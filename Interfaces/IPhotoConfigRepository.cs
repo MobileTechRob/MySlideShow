@@ -9,9 +9,11 @@ namespace MySlideShow.Interfaces
 {
     public interface IPhotoConfigRepository
     {
-        void DeletePhoto(PictureConfig pictureConfig);
-        void SavePhoto(PictureConfig pictureConfig);
-        List<PictureConfig> LoadPhotos();
-        void DeletePhotos();
+        public void DeletePhoto(PictureConfig pictureConfig);
+        public void SavePhoto(PictureConfig pictureConfig);
+        public void SavePhotos(List<PictureConfig> pictureConfigs);
+        public List<PictureConfig> LoadPhotos();
+        public bool VerifyFile();
+        public void DeletePhotos();
     }
 }
