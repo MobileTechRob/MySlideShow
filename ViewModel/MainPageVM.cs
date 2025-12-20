@@ -105,8 +105,16 @@ namespace MySlideShow.ViewModel
 
             foreach (var pic in loadedPictures)
             {
-               ListOfPictures.Add(pic);
-            }          
+                pic.EnableDownArrow = true;
+                pic.EnableUpArrow = true;   
+                ListOfPictures.Add(pic);
+            }
+
+            if (ListOfPictures.Count >= 1)
+            {
+                ListOfPictures[0].EnableUpArrow = false;
+                ListOfPictures[ListOfPictures.Count - 1].EnableDownArrow = false;
+            }
         }
 
         private List<PictureConfig> LoadTempPhotos()

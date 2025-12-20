@@ -10,6 +10,13 @@ namespace MySlideShow.DataModels
 {
     public class PictureConfig
     {
+
+        [JsonIgnore]
+        public bool EnableUpArrow { get; set; } = false;
+
+        [JsonIgnore]
+        public bool EnableDownArrow { get; set; } = false;
+
         public string FilePath { get; set; }
         public int DisplayDuration { get; set; } // in seconds
         public uint FadeTime { get; set; }
