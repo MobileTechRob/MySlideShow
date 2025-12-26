@@ -225,12 +225,6 @@ namespace MySlideShow.ViewModel
             }
         }
 
-        private void PushPage()
-        {
-            slideShow = new SlideShow(ListOfPictures.ToList());
-            _page.Navigation.PushAsync(slideShow);
-        }
-
         private async Task<string> SelectPhotoAsync()
         {
             string localFilePath = string.Empty;

@@ -38,6 +38,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<Description>Picture Slide Show</Description>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -46,9 +47,35 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
+	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'" />
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
+	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
+	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
+	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
+	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
