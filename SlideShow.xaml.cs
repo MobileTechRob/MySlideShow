@@ -24,14 +24,6 @@ public partial class SlideShow : ContentPage
         InitializeComponent();
     }
 
-
-    public SlideShow(List<PictureConfig> pictureConfigs)
-	{
-		InitializeComponent();
-
-        _pictureConfigs = pictureConfigs;
-    }
-
     protected override void OnAppearing()
     {
         _photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
@@ -42,15 +34,6 @@ public partial class SlideShow : ContentPage
 
         StartSlideShow(this);
     }   
-
-
-    //public async void DisplayFirstImage()
-    //{
-    //    SlideShowImageOne.Source = _pictureConfigs[0].FilePath;
-    //    SlideShowImageOne.Opacity = 1;
-
-    //    await Task.Run(() => Thread.Sleep(_pictureConfigs[0].DisplayDurationMs));
-    //}
 
     public void StartSlideShow(ContentPage page)
     {     
@@ -156,10 +139,6 @@ public partial class SlideShow : ContentPage
 
     private void TransitionFunctionCallBack_FadeOut(int imageNumber)
     {
-        //loopCount = _pictureConfigs.Count - 1;
-
-        //await Task.Run(() => { Thread.Sleep(_pictureConfigs[loopCount].DisplayDurationMs); });
-
         parentAnimation2 = new Animation();
 
         if (imageNumber == 1)
@@ -179,15 +158,7 @@ public partial class SlideShow : ContentPage
     }
 
     private void RepeatOrNot(double d, bool b)
-    { 
-        //_page.Navigation.PopAsync();
-
+    {
         Shell.Current.GoToAsync("//MainPage");
     }
-
-    private bool EndSlideShow() 
-    {
-        return true;
-    }
-
 }

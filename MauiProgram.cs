@@ -22,6 +22,7 @@ namespace MySlideShow
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddTransient<Interfaces.IPhotoConfigRepository, Services.PhotoConfigRepository>();
+            builder.Services.AddTransient<SlideShow>();
 
             return builder.Build();
         }
