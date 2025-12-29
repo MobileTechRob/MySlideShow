@@ -46,8 +46,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidKeyStore>False</AndroidKeyStore>
@@ -56,23 +56,23 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
 	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
 	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>PictureSlideShow</ApplicationTitle>
+	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
 	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
 	</PropertyGroup>
@@ -125,6 +125,10 @@
 	  <MauiXaml Update="SlideShow.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="docs\" />
 	</ItemGroup>
 
 </Project>
