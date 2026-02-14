@@ -11,6 +11,7 @@ public partial class EditPicture : ContentPage
     List<PictureConfig> loadedPictures;
     bool editPicture = false;
     PictureConfig pictureConfig = null;
+    IMultiPhotoPicker multiPhotoPicker;
 
 
     public EditPicture()
@@ -18,6 +19,7 @@ public partial class EditPicture : ContentPage
         InitializeComponent();
         
         photoConfigRepository = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IPhotoConfigRepository>()!;
+        multiPhotoPicker = MauiProgram.CreateMauiApp().Services.GetService<Interfaces.IMultiPhotoPicker>()!;
 
         loadedPictures = photoConfigRepository.LoadPhotos();
     }
@@ -46,36 +48,77 @@ public partial class EditPicture : ContentPage
         DisplayTime.Value = pictureConfig.DisplayDuration;
         FadeTime.Value = pictureConfig.FadeTime;
     }
-   
+
     public async Task<PictureConfig> AddNewPicture()
     {
         PictureConfig pictureConfig = null;
+        string photo = "";
+
         // Logic to add a picture
-        string photo = await SelectPhotoAsync();
+        //string photo = await SelectPhotoAsync();
+        List<CameraPhoto> photos = await SelectMultiPhotoAsync();
 
-        if (System.Diagnostics.Debugger.IsAttached)
-        {
-            // Code to run only when debugging
-            if (string.IsNullOrEmpty(photo))
-            {
-                if (loadedPictures == null)
-                    photo = "img_1.png";
-                else
-                {
-                    int count = loadedPictures.Count + 1;
-                    photo = "img_" + count.ToString() + ".png";
-                }
+        //photo = photos[0].Path!;
+        ImageSource imageSource = photos[0].ImageSource!;
 
-                pictureConfig = new PictureConfig(photo);
-            }
-        }
-        else if (!string.IsNullOrEmpty(photo))
+        await DisplayAlert("Selected Photo", $"{photos.Count}", "OK");
+
+
+        //if (System.Diagnostics.Debugger.IsAttached)
+        //{
+        //    // Code to run only when debugging
+        //    if (string.IsNullOrEmpty(photo))
+        //    {
+        //        if (loadedPictures == null)
+        //            photo = "img_1.png";
+        //        else
+        //        {
+        //            int count = loadedPictures.Count + 1;
+        //            photo = "img_" + count.ToString() + ".png";
+        //        }
+
+        //        pictureConfig = new PictureConfig(imageSource);
+        //    }
+        //}
+        if (imageSource != null)        
         {
+            await DisplayAlert("Selected Photo", "image source not null", "OK");  
             // User cancelled or no photo selected
-            pictureConfig = new PictureConfig(photo, 1, 1);
+            pictureConfig = new PictureConfig(photo, imageSource, 1, 1);
         } 
         
         return pictureConfig;
+    }
+
+    private async Task<List<CameraPhoto>> SelectMultiPhotoAsync()
+    {
+        string localFilePath = string.Empty;
+        List<CameraPhoto> photos = null;
+
+        try
+        {
+            photos = await multiPhotoPicker.PickMultiplePhotosAsync();
+
+            //if (photos != null && photos.Count > 0)
+            //{
+            //    localFilePath = photos[0].Path!;
+
+            //    await DisplayAlert("Selected Photo", localFilePath, "OK");
+
+            //    foreach (var item in photos[0].PathSeqments)
+            //    {
+            //        await DisplayAlert("Selected Photo PAth Item", item, "OK");
+            //    }
+            //}
+         
+        }
+        catch (Exception ex)
+        {
+            ex.ToString();
+            // Handle exceptions (permissions, not supported, etc.)
+        }
+
+        return photos;
     }
 
     private async Task<string> SelectPhotoAsync()
@@ -86,12 +129,11 @@ public partial class EditPicture : ContentPage
         {
             MediaPickerOptions mediaPickerOptions = new MediaPickerOptions();
             mediaPickerOptions.Title = "Select Photo";
-            FileResult fileResult = await MediaPicker.PickPhotoAsync(mediaPickerOptions);
+            FileResult? fileResult = await MediaPicker.PickPhotoAsync(mediaPickerOptions);
 
             if (fileResult != null)
             {
                 localFilePath = fileResult.FullPath;
-
             }
         }
         catch (Exception ex)

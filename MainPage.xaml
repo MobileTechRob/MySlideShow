@@ -51,9 +51,19 @@
                 <ImageButton Source="garbage_can.png" IsEnabled="True" Clicked="DeleteImageButton_Clicked"  HeightRequest="50" WidthRequest="50" Aspect="AspectFit" Grid.Column="4" Grid.RowSpan="2"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="emptyListTemplate">
+            <VerticalStackLayout>
+                <Label Text="Add some pictures to create a slide show." 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center"
+                    FontSize="Medium"
+                    TextColor="Black"/>
+            </VerticalStackLayout>
+        </DataTemplate>
         <local:AlternateColorDataTemplateSelector x:Key="alternateColorDataTemplateSelector" 
               EvenTemplate="{StaticResource evenTemplate}"
-              UnevenTemplate="{StaticResource unevenTemplate}">
+              UnevenTemplate="{StaticResource unevenTemplate}"
+              EmptyListTemplate ="{StaticResource emptyListTemplate}">
         </local:AlternateColorDataTemplateSelector>
     </ContentPage.Resources>
 

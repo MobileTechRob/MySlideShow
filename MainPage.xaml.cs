@@ -20,6 +20,8 @@ namespace MySlideShow
         {                    
             base.OnAppearing();
 
+            DisplayAlert("Welcome", "OnAppearing", "OK");
+
             // Additional logic can be added here if needed when the page appears
             mainPageVM.RefreshPhotos();           
         }

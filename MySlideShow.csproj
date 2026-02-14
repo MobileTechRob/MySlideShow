@@ -46,23 +46,26 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
 	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
+	  <AndroidLinkTool>r8</AndroidLinkTool>
+	  <EnableLLVM>False</EnableLLVM>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
 	  <ApplicationTitle>Picture Slide Show</ApplicationTitle>
 	  <AndroidUseAapt2>True</AndroidUseAapt2>
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <ApplicationIdGuid>89C5CBA1-9388-42CF-94BF-60797217408C</ApplicationIdGuid>
 	  <ApplicationId>com.mobilefirsttechnologies.myslideshow</ApplicationId>
+	  <EnableLLVM>False</EnableLLVM>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
@@ -95,11 +98,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="NewFolder1\**" />
+	  <AndroidResource Remove="NewFolder\**" />
+	  <Compile Remove="NewFolder1\**" />
+	  <Compile Remove="NewFolder\**" />
+	  <EmbeddedResource Remove="NewFolder1\**" />
+	  <EmbeddedResource Remove="NewFolder\**" />
+	  <MauiCss Remove="NewFolder1\**" />
+	  <MauiCss Remove="NewFolder\**" />
+	  <MauiXaml Remove="NewFolder1\**" />
+	  <MauiXaml Remove="NewFolder\**" />
+	  <None Remove="NewFolder1\**" />
+	  <None Remove="NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Remove="Animation\MyAnimation.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="com.companyname.myslideshow.apk" />
+	  <None Remove="com.mobilefirsttechnologies.myslideshow.aab" />
+	  <None Remove="com.mobilefirsttechnologies.myslideshow.apk" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Splash\splash.png" />
 	</ItemGroup>
@@ -119,10 +139,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AddPhotosByTimeFrame.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ClearCurrentList.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="EditPicture.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SlideShow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UnitTestPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

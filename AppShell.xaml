@@ -11,13 +11,25 @@
         Title="Slide Show"       
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
-
+    
     <FlyoutItem Title="Add Picture">
         <ShellContent ContentTemplate="{DataTemplate local:EditPicture}"  />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Add Pictures By Timeframe">
+        <ShellContent ContentTemplate="{DataTemplate local:AddPhotosByTimeFrame}"  />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Clear Current List">
+        <ShellContent ContentTemplate="{DataTemplate local:ClearCurrentList}"  />
     </FlyoutItem>
 
     <FlyoutItem Title="Generate Slide Show">
         <ShellContent ContentTemplate="{DataTemplate local:SlideShow}"  />
     </FlyoutItem>
+
+    <!--<FlyoutItem Title="Unit Test Page">
+        <ShellContent ContentTemplate="{DataTemplate local:UnitTestPage}"  />
+    </FlyoutItem>-->
 
 </Shell>

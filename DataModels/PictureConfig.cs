@@ -6,8 +6,18 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
+
 namespace MySlideShow.DataModels
 {
+
+    public enum PhotoListState
+    {
+        Unknown,
+        Empty,
+        HasPhotos
+    }
+
+
     public class PictureConfig
     {
 
@@ -32,22 +42,47 @@ namespace MySlideShow.DataModels
 
         [JsonIgnore]
         public uint FadeTimeMs { get { if (FadeTime == 0) return 250;  return FadeTime * 1000; } }        
-        public Guid Id {  get; set; }   
+        public Guid Id {  get; set; }
+
+        [JsonIgnore]
+        public PhotoListState PhotoListState { get; set; } = PhotoListState.Unknown;
+
+        [JsonIgnore]
+        public ImageSource ImageSource { get; set; }
+
 
         public PictureConfig()
         {
             FilePath = string.Empty;
             DisplayDuration = 1; // default duration
             FadeTime = 1;          
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid();           
+            ImageSource = null;
         }
 
-        public PictureConfig(string filePath, int displayDuration =1, uint transitionTime = 1)
+        public PictureConfig(ImageSource imageSource)
+        {
+            FilePath = string.Empty;
+            DisplayDuration = 1; // default duration
+            FadeTime = 1;
+            Id = Guid.NewGuid();
+            ImageSource = imageSource;
+        }
+
+        public PictureConfig(PhotoListState photoListState)
+        {
+            FilePath = string.Empty;
+
+            this.PhotoListState = photoListState;
+        }
+
+        public PictureConfig(string filePath, ImageSource imageSource, int displayDuration =1, uint transitionTime = 1)
         {
             FilePath = filePath;
             DisplayDuration = displayDuration; // default duration
             FadeTime = transitionTime;          
             Id = Guid.NewGuid();
+            ImageSource = imageSource;
         }
     }
 }

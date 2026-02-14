@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MySlideShow.AddPhotosByTimeFrame"
+             Title="Choose Time Frame">
+    <Grid x:Name="TimeFrameSelection">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>            
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <DatePicker Format="MM/dd/yyyy"
+            x:Name="datePickerFromDate"
+            VerticalOptions="Center" HorizontalOptions="End"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+
+        <TimePicker 
+            x:Name="timePickerFromTime"
+            VerticalOptions="Center" HorizontalOptions="Start"  Grid.Row="0" Grid.Column="3" />
+
+        <Label x:Name="TimeFrameText" Text="" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" />
+        
+        <Slider 
+            x:Name="sliderTimeFrame"
+            Minimum="0"
+            Maximum="59"
+            ValueChanged="sliderTimeFrame_ValueChanged"
+            VerticalOptions="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" />
+        
+                
+        <RadioButton 
+            x:Name="radioButtonMinute"
+            Content="Minute"
+            CheckedChanged="radioButtonMinute_CheckedChanged"
+            VerticalOptions="Center"
+            HorizontalOptions="Start" Grid.Row="5" Grid.Column="1" />
+
+        <RadioButton 
+            x:Name="radioButtonHour"
+            Content="Hour"
+            CheckedChanged="radioButtonHour_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="6" Grid.Column="1" />
+
+        <RadioButton 
+            x:Name="radioButtonDay"
+            Content="Day"
+            CheckedChanged="radioButtonDay_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="7" Grid.Column="1" />
+
+        <RadioButton 
+            x:Name="radioButtonWeek"
+            Content="Week"
+            CheckedChanged="radioButtonWeek_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="8" Grid.Column="1" />
+
+        <RadioButton 
+            x:Name="radioButtonOther"
+            Content="Other"
+            CheckedChanged="radioButtonOther_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="9" Grid.Column="1" />
+
+        <DatePicker Format="MM/dd/yyyy"
+            x:Name="datePickerEarlierDate"
+            VerticalOptions="Center" HorizontalOptions="End" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" />
+
+        <TimePicker 
+            x:Name="timePickerEarlierTime"
+            VerticalOptions="Center" HorizontalOptions="Start"  Grid.Row="10" Grid.Column="3" />
+
+        <RadioButton 
+            x:Name="radioButtonAscending"
+            Content="Ascending"
+            CheckedChanged="radioButtonAscending_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="11" Grid.Column="1" />
+
+        <RadioButton 
+            x:Name="radioButtonDescending"
+            Content="Descending"
+            CheckedChanged="radioButtonDescending_CheckedChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="11" Grid.Column="2" />
+        
+        <Button 
+            x:Name="btnAddPhotosGetDirectory"
+            BackgroundColor="ForestGreen"
+            Text="Select Photo Directory"
+            Clicked="btnAddPhotosGetDirectory_Clicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" />
+
+        <Button 
+            x:Name="btnAddPhotosByTimeFrame"
+            BackgroundColor="ForestGreen"
+            Text="Build Photo List"
+            Clicked="btnAddPhotosByTimeFrame_Clicked"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" Grid.Row="12" Grid.Column="3" />
+    </Grid>
+</ContentPage>

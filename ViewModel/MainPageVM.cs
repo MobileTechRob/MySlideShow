@@ -93,7 +93,9 @@ namespace MySlideShow.ViewModel
 
             if (loadedPictures == null)
             {
-                return;
+                loadedPictures = new List<PictureConfig>();
+                loadedPictures.Add(new PictureConfig(PhotoListState.Empty));
+             
                 //_photoConfigRepository.SavePhotos(LoadTempPhotos());
                 //loadedPictures = _photoConfigRepository.LoadPhotos();
             }
@@ -121,14 +123,14 @@ namespace MySlideShow.ViewModel
         {
             List<PictureConfig> loadedPictures = new List<PictureConfig>();
 
-            loadedPictures.Add(new PictureConfig("img_one.png", 4,1));
-            loadedPictures.Add(new PictureConfig("img_two.png", 3, 2));
-            loadedPictures.Add(new PictureConfig("img_three.png", 2, 7));
-            loadedPictures.Add(new PictureConfig("img_four.png", 5,2));
-            loadedPictures.Add(new PictureConfig("img_five.png", 6, 1));
-            loadedPictures.Add(new PictureConfig("img_six.png", 7, 3));
-            loadedPictures.Add(new PictureConfig("img_seven.png", 8, 1));
-            loadedPictures.Add(new PictureConfig("img_eight.png", 9, 4));
+            //loadedPictures.Add(new PictureConfig("img_one.png", 4,1));
+            //loadedPictures.Add(new PictureConfig("img_two.png", 3, 2));
+            //loadedPictures.Add(new PictureConfig("img_three.png", 2, 7));
+            //loadedPictures.Add(new PictureConfig("img_four.png", 5,2));
+            //loadedPictures.Add(new PictureConfig("img_five.png", 6, 1));
+            //loadedPictures.Add(new PictureConfig("img_six.png", 7, 3));
+            //loadedPictures.Add(new PictureConfig("img_seven.png", 8, 1));
+            //loadedPictures.Add(new PictureConfig("img_eight.png", 9, 4));
             //loadedPictures.Add(new PictureConfig("img_nine.png", 4, 5));
             //loadedPictures.Add(new PictureConfig("img_ten.png", 4, 5));
             //loadedPictures.Add(new PictureConfig("img_eleven.png", 4, 5));
@@ -144,36 +146,36 @@ namespace MySlideShow.ViewModel
             await _page.Navigation.PushAsync(new EditPicture(_page, selectedPictureConfig));
         }
 
-        public async void AddNewPicture()
-        {
-            PictureConfig pictureConfig = null;
-            // Logic to add a picture
-            string photo = await SelectPhotoAsync();
+        //public async void AddNewPicture()
+        //{
+        //    PictureConfig pictureConfig = null;
+        //    // Logic to add a picture
+        //    string photo = await SelectPhotoAsync();
 
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                // Code to run only when debugging
-                if (string.IsNullOrEmpty(photo))
-                {
-                    if (loadedPictures == null)
-                        photo = "img_1.png";
-                    else
-                    {
-                        int count = loadedPictures.Count + 1;
-                        photo = "img_" + count.ToString() + ".png";
-                    }
+        //    if (System.Diagnostics.Debugger.IsAttached)
+        //    {
+        //        // Code to run only when debugging
+        //        if (string.IsNullOrEmpty(photo))
+        //        {
+        //            if (loadedPictures == null)
+        //                photo = "img_1.png";
+        //            else
+        //            {
+        //                int count = loadedPictures.Count + 1;
+        //                photo = "img_" + count.ToString() + ".png";
+        //            }
                     
-                    pictureConfig = new PictureConfig(photo);
-                }
-            }
-            else if (!string.IsNullOrEmpty(photo))
-            {
-                // User cancelled or no photo selected
-                pictureConfig = new PictureConfig(photo, 1, 1);
-            }
+        //            pictureConfig = new PictureConfig(photo);
+        //        }
+        //    }
+        //    else if (!string.IsNullOrEmpty(photo))
+        //    {
+        //        // User cancelled or no photo selected
+        //        pictureConfig = new PictureConfig(photo, 1, 1);
+        //    }
             
-            await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
-        }
+        //    await _page.Navigation.PushAsync(new EditPicture(_page, pictureConfig));
+        //}
 
         public void DeletePicture(object sender)
         {

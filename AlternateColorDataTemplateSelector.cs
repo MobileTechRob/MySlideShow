@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySlideShow.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace MySlideShow
     {
         public DataTemplate EvenTemplate { get; set; }
         public DataTemplate UnevenTemplate { get; set; }
+        public DataTemplate EmptyListTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -18,6 +20,14 @@ namespace MySlideShow
             var collectionView = (CollectionView)container;
             var items = (System.Collections.IList)collectionView.ItemsSource;
             var index = items.IndexOf(item);
+
+            if (items.Count == 1)
+            { 
+               PictureConfig pictureConfig = (PictureConfig)items[0]!;
+
+               if (pictureConfig!.PhotoListState == PhotoListState.Empty)
+                    return EmptyListTemplate;
+            }
 
             return index % 2 == 0 ? EvenTemplate : UnevenTemplate;
         }
